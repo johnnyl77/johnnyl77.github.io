@@ -2,24 +2,25 @@
    DARK THEME
    ========================================================================== */
 
-/* Color codes used for the theme */
-$gray                       : #7a8288;
-$dark-gray                  : mix(#000, $gray, 40%);
-$darker-gray                : mix(#000, $gray, 60%);
-$light-gray                 : mix(#fff, $gray, 50%);
+/* Color codes used for the theme - Soft Lavender Palette */
+/* Dark mode background target: 4A4E69 */
+$gray                       : #9A8C98;
+$dark-gray                  : #4A4E69;
+$darker-gray                : #22223B;
+$light-gray                 : #C9ADA7;
 
-$background                 : #474747;
-$background-light           : mix(#fff, $background, 80%);
-$background-lighter         : mix(#fff, $background, 90%);
-$text                       : #ffffff;
-$link                       : #0ea1c5;
-$link-dark                  : mix(#000, $link, 25%);
-$link-light                 : mix(#fff, $link, 25%);
+$background                 : #4A4E69;   /* page background */
+$background-light           : #9A8C98;   /* accents, hovers */
+$background-lighter         : #F2E9E4;   /* cards, code backgrounds */
+$text                       : #F2E9E4;   /* primary text */
+$link                       : #C9ADA7;   /* link color */
+$link-dark                  : #9A8C98;   /* link hover */
+$link-light                 : mix(#fff, $link, 15%);
 
 /* Color codes used for the site */
 $danger-color               : #ee5f5b;
-$info-color                 : #2f7f93;
-$notice-color               : #7a8288;
+$info-color                 : #9A8C98;
+$notice-color               : #C9ADA7;
 $success-color              : #62c462;
 $warning-color              : #f89406;
 
@@ -33,22 +34,4 @@ $navicon-height             : 4px;
 $sidebar-link-max-width     : 250px;
 $sidebar-screen-min-width   : 1024px;
 
-/* Dark theme for the site */
-html[data-theme="dark"] {
-    --global-base-color                 : #{$background};
-    --global-bg-color                   : #{$background};
-    --global-footer-bg-color            : #{$background};
-    --global-border-color               : #{$light-gray};
-    --global-dark-border-color          : #{$background-light};
-    --global-code-background-color      : #fafafa;
-    --global-code-text-color            : #{$darker-gray};
-    --global-fig-caption-color          : #{$light-gray};
-    --global-link-color                 : #{$link};
-    --global-link-color-hover           : #{$link-dark};
-    --global-link-color-visited         : #{$link-light};
-    --global-masthead-link-color        : #{$text};
-    --global-masthead-link-color-hover  : #{$background-light};
-    --global-text-color                 : #{$text};
-    --global-text-color-light           : #f3f3f3;
-    --global-thead-color                : #{$background-lighter};
-}
+/* Note: System preference dark mode and html[data-theme="dark"] are now handled by theme-colors.css */

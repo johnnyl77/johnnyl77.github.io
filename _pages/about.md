@@ -1,11 +1,83 @@
 ---
 permalink: /
-# title: "Johnny Ling"
 author_profile: true
 redirect_from: 
   - /about/
   - /about.html
 ---
+
+<link rel="stylesheet" href="{{ base_path }}/assets/css/theme-colors.css">
+
+<style>
+/* About page - Minimalistic Deep Ocean Blue */
+.author__name {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.author__bio {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 1rem;
+}
+
+.page__content {
+  max-width: 900px;
+}
+
+.page__content h1, 
+.page__content h2, 
+.page__content h3 {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 0.5rem;
+}
+
+.page__content a {
+  color: var(--color-3);
+  font-weight: 500;
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.page__content a:hover {
+  color: var(--color-2);
+}
+
+.page__content p {
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-size: 1.05rem;
+  margin-bottom: 1.2rem;
+}
+
+/* Author profile styling */
+.author__avatar img {
+  border: 2px solid var(--border-color);
+  transition: border-color 0.2s ease;
+}
+
+.author__avatar img:hover {
+  border-color: var(--color-3);
+}
+
+.author__urls {
+  color: var(--text-secondary);
+}
+
+.author__urls a {
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.author__urls a:hover {
+  color: var(--color-3);
+}
+</style>
 
 About Me
 ===

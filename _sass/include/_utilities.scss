@@ -252,6 +252,10 @@ body:hover .visually-hidden button {
     color: $lastfm-color;
   }
 
+  .fa-code {
+    color: $leetcode-color;
+  }
+
   .fa-linkedin,
   .fa-linkedin-square {
     color: $linkedin-color;
@@ -324,6 +328,7 @@ body:hover .visually-hidden button {
    ========================================================================== */
 
 .navicon {
+  display: none; /* Hide the hamburger menu button */
   position: relative;
   width: $navicon-width;
   height: $navicon-height;

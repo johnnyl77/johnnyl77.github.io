@@ -7,8 +7,101 @@ author_profile: true
 
 {% include base_path %}
 
+<!-- Theme colors -->
+<link rel="stylesheet" href="{{ base_path }}/assets/css/theme-colors.css">
+<!-- Project-specific styles -->
+<link rel="stylesheet" href="{{ base_path }}/assets/css/projects.css">
 
-{% for post in site.projects %}
-  {% include archive-single.html %}
+<style>
+/* Author profile styling - consistent with about page */
+.author__urls {
+  color: var(--text-secondary);
+}
+
+.author__urls a {
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.author__urls a:hover {
+  color: var(--color-3);
+}
+</style>
+
+<!-- Loop through all projects -->
+<!-- Support manual ordering via `order` front matter; fallback to date sorting for others -->
+{% assign with_order = site.projects | where_exp: 'p', 'p.order' %}
+{% assign without_order = site.projects | where_exp: 'p', 'p.order == nil' %}
+{% assign sorted_with_order = with_order | sort: 'order' %}
+{% assign sorted_without_order = without_order | sort: 'date' %}
+{% assign sorted_projects = sorted_with_order | concat: sorted_without_order %}
+{% for project in sorted_projects %}
+<div class="project-card">
+    <div class="project-header">
+        <div class="project-title-section">
+            <span class="status-dot {% if project.status %}{{ project.status | downcase | replace: ' ', '-' }}{% endif %} {% if project.status == 'completed' %}completed{% endif %}"></span>
+            <h2>{{ project.title }}</h2>
+        </div>
+        <div class="project-links">
+            {% if project.github_url %}
+            <a href="{{ project.github_url }}" title="GitHub" target="_blank"><i class="fab fa-github"></i></a>
+            {% endif %}
+            {% unless project.title == 'Real-Time Elevator Control System' %}
+            <button class="see-more-btn" onclick="toggleCarousel('carousel-{{ project.carousel_id }}')" title="See More" aria-label="Toggle project gallery">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            {% endunless %}
+        </div>
+    </div>
+    <div class="project-date">{{ project.date_range }}</div>
+    
+    <div class="tech-tags">
+        {% for tech in project.technologies %}
+        <span class="tech-tag">{{ tech }}</span>
+        {% endfor %}
+    </div>
+    
+    <div class="project-description">
+        {{ project.excerpt }}
+    </div>
+    
+    <!-- Carousel -->
+    <div class="carousel-container" id="carousel-{{ project.carousel_id }}">
+        <div class="carousel-content-wrapper">
+            <div class="carousel-track">
+                {% for slide in project.carousel_slides %}
+                <div class="carousel-slide" data-caption="{{ slide.caption }}">
+                    {% if slide.type == 'video' %}
+                        {% if slide.url contains 'youtube.com' or slide.url contains 'youtu.be' %}
+                            {% assign video_id = slide.url | split: 'v=' | last | split: '&' | first %}
+                            <iframe src="https://www.youtube.com/embed/{{ video_id }}?enablejsapi=1" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                    allowfullscreen>
+                            </iframe>
+                        {% else %}
+                            <video controls loop>
+                                <source src="{{ slide.url }}" type="video/mp4">
+                            </video>
+                        {% endif %}
+                    {% else %}
+                    <img src="{{ slide.url }}" alt="{{ slide.alt }}">
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <button class="carousel-btn prev" onclick="moveCarousel('carousel-{{ project.carousel_id }}', -1)" aria-label="Previous slide">
+            &#10094;
+        </button>
+        <button class="carousel-btn next" onclick="moveCarousel('carousel-{{ project.carousel_id }}', 1)" aria-label="Next slide">
+            &#10095;
+        </button>
+        <div class="carousel-caption-display"></div>
+        <div class="carousel-indicators"></div>
+    </div>
+</div>
 {% endfor %}
 
+<!-- Carousel functionality -->
+<script src="{{ base_path }}/assets/js/carousel.js"></script>

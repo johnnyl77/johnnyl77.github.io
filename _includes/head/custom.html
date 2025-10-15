@@ -2,16 +2,41 @@
 
 <!-- start custom head snippets -->
 
+<!-- Inline theme initialization to prevent FOUC (must run before CSS loads) -->
+<script>
+(function() {
+  const THEME_STORAGE_KEY = 'theme';
+  const DARK = 'dark';
+  const LIGHT = 'light';
+  
+  function getSavedTheme() {
+    try {
+      return localStorage.getItem(THEME_STORAGE_KEY);
+    } catch (error) {
+      return null;
+    }
+  }
+  
+  function getSystemTheme() {
+    return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? DARK : LIGHT;
+  }
+  
+  // Set theme immediately before any rendering
+  const theme = getSavedTheme() || getSystemTheme();
+  document.documentElement.setAttribute('data-theme', theme);
+})();
+</script>
+
 <!-- Support for Academicons -->
 <link rel="stylesheet" href="{{ base_path }}/assets/css/academicons.css"/>
 
-<!-- favicon from https://commons.wikimedia.org/wiki/File:OOjs_UI_icon_academic-progressive.svg -->
-<link rel="apple-touch-icon" sizes="180x180" href="{{ base_path }}/images/apple-touch-icon-180x180.png"/>
-<link rel="icon" type="image/svg+xml" href="{{ base_path }}/images/favicon.svg"/>
-<link rel="icon" type="image/png" href="{{ base_path }}/images/favicon-32x32.png" sizes="32x32"/>
-<link rel="icon" type="image/png" href="{{ base_path }}/images/favicon-192x192.png" sizes="192x192"/>
+<!-- Custom Theme Colors -->
+<link rel="stylesheet" href="{{ base_path }}/assets/css/theme-colors.css">
+
+<!-- favicon -->
+<link rel="icon" type="image/png" href="{{ base_path }}/images/icon.png"/>
+<link rel="apple-touch-icon" href="{{ base_path }}/images/icon.png"/>
 <link rel="manifest" href="{{ base_path }}/images/manifest.json"/>
-<link rel="icon" href="/images/favicon.ico"/>
 <meta name="theme-color" content="#ffffff"/>
 
 <!-- end custom head snippets -->

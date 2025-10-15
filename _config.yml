@@ -9,21 +9,21 @@
 # Basic Site Settings
 locale                   : "en-US"
 site_theme               : "default" # Currently available options are "default", "air"
-title                    : "Johnny's Portfolio"
+title                    : "Johnny Ling"
 title_separator          : "-"
 name                     : &name "Johnny Ling"
-description              : &description "Johnny's academic portfolio"   # Update this with a general description of your site, this is the default if not overridden by a page
+description              : &description "Johnny's Portfolio"   # Update this with a general description of your site, this is the default if not overridden by a page
 url                      : https://johnnyl77.github.io # The base hostname & protocol for your site e.g. "https://[your GitHub username].github.io",
                                                            # or if you already have some other page hosted on Github then use "https://[your GitHub username].github.io/[Your Repo Name]"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
-repository               : "academicpages/academicpages.github.io"
+repository               : "johnnyl77/johnnyl77.github.io"
 
 # Site Author - The following control what appear as part of the author content on the side bar.
 #               If a field is blank the icon and link will not appear, otherwise it will be shown.
 #               Additional customization can be done by editing /_includes/author-profile.html
 author:
   # Biographic information
-  avatar           : "profile.png"
+  avatar           : "pfp.jpg"
   name             : "Johnny Ling"
   pronouns         : # example: "she/her"  
   bio              : "Recent CS Honours Graduate seeking 2026 New Grad Opportunities"
@@ -64,6 +64,7 @@ author:
   instagram        : # Username
   lastfm           : # Username
   linkedin         : "johnnyling"
+  leetcode         : "Reszonance"
   mastodon         : # URL
   medium           : # URL
   pinterest        : # Username

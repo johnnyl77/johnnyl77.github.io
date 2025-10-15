@@ -1,0 +1,209 @@
+/* Soft Lavender palette bridge: map these utilities to the SCSS-driven CSS vars. */
+/* https://coolors.co/palette/22223b-4a4e69-9a8c98-c9ada7-f2e9e4 */
+
+/* Base/default (light mode unless overridden by data-theme or prefers-color-scheme) */
+:root {
+  /* Semantic aliases driven by _sass theme variables */
+  --bg-primary: var(--global-bg-color);
+  --bg-secondary: var(--global-bg-color);
+  --bg-card: #F2E9E4;         /* linen for cards */
+  --bg-card-hover: #EADFD9;
+  --border-color: rgba(201, 173, 167, 0.3);  /* subtle, almost invisible */
+  --border-hover: rgba(74, 78, 105, 0.6);    /* more visible on hover */
+  --text-primary: var(--global-text-color);
+  --text-secondary: var(--global-text-color);
+  --text-muted: #22223B;      /* all text in light mode */
+  --text-project-date: #4A4E69;  /* specific color for project dates */
+  --shadow-color: rgba(0,0,0,0.08);
+  --shadow-hover: rgba(0,0,0,0.14);
+
+  /* Optional accent ramp from palette */
+  --color-1: #22223B; /* deepest text */
+  --color-2: #4A4E69; /* slate */
+  --color-3: #9A8C98; /* lavender */
+  --color-4: #C9ADA7; /* rose taupe */
+  --color-5: #F2E9E4; /* linen */
+  --tech-tag-bg: #4A4E69;
+}
+
+/* Explicit light mode via toggle - override all variables with light theme colors */
+html[data-theme="light"] {
+  /* Override SCSS global variables directly for light mode */
+  --global-base-color: #4A4E69;
+  --global-bg-color: #F2E9E4;
+  --global-footer-bg-color: #F2E9E4;
+  --global-border-color: rgba(201, 173, 167, 0.3);
+  --global-dark-border-color: rgba(74, 78, 105, 0.6);
+  --global-code-background-color: #F2E9E4;
+  --global-code-text-color: #22223B;
+  --global-fig-caption-color: #22223B;
+  --global-link-color: #22223B;
+  --global-link-color-hover: #22223B;
+  --global-link-color-visited: #22223B;
+  --global-masthead-link-color: #22223B;
+  --global-masthead-link-color-hover: #22223B;
+  --global-text-color: #22223B;
+  --global-text-color-light: #F2E9E4;
+  --global-thead-color: #22223B;
+  
+  /* Local utility variables */
+  --bg-primary: #F2E9E4;
+  --bg-secondary: #F2E9E4;
+  --bg-card: #C9ADA7;  /* Project card background */
+  --bg-card-hover: #B89B96;
+  --border-color: rgba(201, 173, 167, 0.3);  /* subtle, almost invisible */
+  --border-hover: rgba(74, 78, 105, 0.6);    /* more visible on hover */
+  --text-primary: #22223B;
+  --text-secondary: #22223B;
+  --text-muted: #22223B;
+  --text-project-date: #4A4E69;              /* specific color for project dates */
+  --shadow-color: rgba(0,0,0,0.08);
+  --shadow-hover: rgba(0,0,0,0.14);
+  --tech-tag-bg: #F2E9E4;  /* Updated to F2E9E4 for light mode */
+}
+
+/* Explicit dark mode via toggle - override all variables with dark theme colors */
+html[data-theme="dark"] {
+  /* Override SCSS global variables directly for dark mode */
+  --global-base-color: #4A4E69;
+  --global-bg-color: #4A4E69;
+  --global-footer-bg-color: #4A4E69;
+  --global-border-color: rgba(201, 173, 167, 0.2);
+  --global-dark-border-color: rgba(154, 140, 152, 0.6);
+  --global-code-background-color: #F2E9E4;
+  --global-code-text-color: #F2E9E4;
+  --global-fig-caption-color: #F2E9E4;
+  --global-link-color: #F2E9E4;
+  --global-link-color-hover: #C9ADA7;
+  --global-link-color-visited: #d4b8b2;
+  --global-masthead-link-color: #F2E9E4;
+  --global-masthead-link-color-hover: #C9ADA7;
+  --global-text-color: #F2E9E4;
+  --global-text-color-light: #9A8C98;
+  --global-thead-color: #F2E9E4;
+  
+  /* Local utility variables */
+  --bg-primary: #4A4E69;
+  --bg-secondary: #4A4E69;
+  --bg-card: #22223B;
+  --bg-card-hover: #2a2d45;
+  --border-color: rgba(201, 173, 167, 0.2);  /* subtle border */
+  --border-hover: rgba(154, 140, 152, 0.6);  /* more visible on hover */
+  --text-primary: #F2E9E4;
+  --text-secondary: #F2E9E4;
+  --text-muted: #9A8C98;
+  --text-project-date: #9A8C98;  /* project date color for dark mode */
+  --shadow-color: rgba(255,255,255,0.05);
+  --shadow-hover: rgba(255,255,255,0.1);
+  --tech-tag-bg: #4A4E69;
+}
+
+/* Apply theme globally without fighting SCSS: just inherit */
+html {
+  background: var(--global-bg-color);
+}
+
+body {
+  background: var(--global-bg-color);
+  color: var(--global-text-color);
+  font-family: Consolas, monospace;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.page,
+.page__content,
+.page__inner-wrap,
+.archive {
+  background: var(--global-bg-color);
+  color: var(--global-text-color);
+}
+
+.page__title {
+  color: var(--global-text-color);
+  font-weight: 700;
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Ensure header/footer follow same bg var; no hard-coded secondaries */
+.masthead,
+.page__footer {
+  background: var(--global-bg-color);
+  border-color: var(--global-border-color);
+}
+
+/* Theme toggle button styling */
+#theme-toggle {
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.2s ease;
+}
+
+#theme-toggle:hover {
+  opacity: 0.7;
+}
+
+#theme-toggle i {
+  font-size: 1.2em;
+}
+
+a {
+  color: var(--global-link-color);
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--global-link-color-hover);
+}
+
+/* Footer sitemap text styling - specific color for light mode only */
+html[data-theme="light"] .page__footer-copyright,
+:root:not([data-theme]) .page__footer-copyright {
+  color: #4A4E69 !important;
+}
+
+/* System preference dark mode (only when no explicit theme is set) */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    /* Override all global variables for auto dark mode */
+    --global-base-color: #4A4E69;
+    --global-bg-color: #4A4E69;
+    --global-footer-bg-color: #4A4E69;
+    --global-border-color: rgba(201, 173, 167, 0.2);
+    --global-dark-border-color: rgba(154, 140, 152, 0.6);
+    --global-code-background-color: #F2E9E4;
+    --global-code-text-color: #F2E9E4;
+    --global-fig-caption-color: #F2E9E4;
+    --global-link-color: #F2E9E4;
+    --global-link-color-hover: #C9ADA7;
+    --global-link-color-visited: #d4b8b2;
+    --global-masthead-link-color: #F2E9E4;
+    --global-masthead-link-color-hover: #C9ADA7;
+    --global-text-color: #F2E9E4;
+    --global-text-color-light: #9A8C98;
+    --global-thead-color: #F2E9E4;
+    
+    /* Utility variables for dark mode */
+    --bg-primary: #4A4E69;
+    --bg-secondary: #4A4E69;
+    --bg-card: #22223B;
+    --bg-card-hover: #2a2d45;
+    --border-color: rgba(201, 173, 167, 0.2);
+    --border-hover: rgba(154, 140, 152, 0.6);
+    --text-primary: #F2E9E4;
+    --text-secondary: #F2E9E4;
+    --text-muted: #9A8C98;
+    --text-project-date: #9A8C98;  /* project date color for dark mode */
+    --shadow-color: rgba(255,255,255,0.05);
+    --shadow-hover: rgba(255,255,255,0.1);
+    --tech-tag-bg: #4A4E69;
+  }
+  
+  /* Override footer sitemap text color for dark mode */
+  :root:not([data-theme]) .page__footer-copyright {
+    color: var(--global-text-color-light);
+  }
+}

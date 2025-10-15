@@ -2,17 +2,19 @@
    DEFAULT THEME
    ========================================================================== */
 
-/* Color codes used for the theme */
-$gray                       : #7a8288;
-$dark-gray                  : mix(#000, $gray, 40%);
-$darker-gray                : mix(#000, $gray, 60%);
-$light-gray                 : mix(#fff, $gray, 50%);
-$lighter-gray               : mix(#fff, $gray, 90%);
+/* Color codes used for the theme - Soft Lavender Palette */
+/* Base palette: 22223B (ink), 4A4E69 (slate), 9A8C98 (lavender), C9ADA7 (rose-taupe), F2E9E4 (linen) */
+/* Light mode background target: 9A8C98 */
+$gray                       : #9A8C98;   /* general muted text in light mode */
+$dark-gray                  : #4A4E69;   /* headings/links in light mode */
+$darker-gray                : #22223B;   /* strongest text */
+$light-gray                 : #C9ADA7;   /* accents/borders light */
+$lighter-gray               : #F2E9E4;   /* cards/contrast on light bg */
 
 /* Color codes used for the site */
 $danger-color               : #ee5f5b;
-$info-color                 : #2f7f93;
-$notice-color               : #7a8288;
+$info-color                 : #4A4E69;
+$notice-color               : #9A8C98;
 $success-color              : #62c462;
 $warning-color              : #f89406;
 
@@ -28,20 +30,23 @@ $sidebar-screen-min-width   : 1024px;
 
 /* Default light theme for the site */
 :root {
-    --global-base-color                 : #{$gray};
-    --global-bg-color                   : #fff;
-    --global-footer-bg-color            : #f2f3f3;
-    --global-border-color               : #{$lighter-gray};
-    --global-dark-border-color          : #bdc1c4;
-    --global-code-background-color      : #fafafa;
+    /* Use lavender as page background; use linen for cards for contrast */
+    --global-base-color                 : #{$dark-gray};
+    --global-bg-color                   : #{$gray};
+    --global-footer-bg-color            : #{$gray};
+    --global-border-color               : #{$light-gray};
+    --global-dark-border-color          : #{$dark-gray};
+    --global-code-background-color      : #{$lighter-gray};
     --global-code-text-color            : #{$darker-gray};
-    --global-fig-caption-color          : mix(#fff,  #{$dark-gray}, 25%);
-    --global-link-color                 : #52adc8;
-    --global-link-color-hover           : mix(#000, #2f7f93, 25%);
-    --global-link-color-visited         : mix(#fff, #2f7f93, 25%);  
-    --global-masthead-link-color        : #{$dark-gray};
-    --global-masthead-link-color-hover  : mix(#000, #{$gray}, 25%);    
-    --global-text-color                 : #{$dark-gray};
-    --global-text-color-light           : #{$light-gray};
-    --global-thead-color                : #{$lighter-gray};
+    --global-fig-caption-color          : #{$darker-gray};
+    --global-link-color                 : #{$dark-gray};
+    --global-link-color-hover           : #{$darker-gray};
+    --global-link-color-visited         : #{$light-gray};
+    --global-masthead-link-color        : #{$darker-gray};
+    --global-masthead-link-color-hover  : #{$dark-gray};
+    --global-text-color                 : #{$darker-gray};
+    --global-text-color-light           : #{$lighter-gray};
+    --global-thead-color                : #{$light-gray};
 }
+
+/* Note: html[data-theme="light"] is now handled by theme-colors.css */

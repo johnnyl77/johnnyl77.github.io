@@ -7,8 +7,255 @@ author_profile: true
 
 {% include base_path %}
 
+<link rel="stylesheet" href="{{ base_path }}/assets/css/theme-colors.css">
 
-{% for post in site.work-experience %}
-  {% include archive-single.html %}
+<style>
+/* Author profile styling - consistent with about page */
+.author__urls {
+  color: var(--text-secondary);
+}
+
+.author__urls a {
+  color: var(--text-secondary);
+  transition: color 0.2s ease;
+}
+
+.author__urls a:hover {
+  color: var(--color-3);
+}
+
+.page__title {
+  color: var(--text-primary);
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+/* Work Experience Timeline Styles - Similar to Projects but with vertical connectors */
+.timeline {
+  position: relative;
+  padding: 20px 0;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 3px;
+  height: calc(100% - 80px);
+  background: var(--border-color);
+  border-radius: 2px;
+  top: 40px;
+}
+
+.experience-card {
+  background: var(--bg-card);
+  border: 4px solid var(--border-color);
+  border-radius: 12px;
+  padding: 30px 20px 15px 20px;
+  margin-bottom: 20px;
+  max-width: 900px;
+  transition: all 0.2s ease;
+  /* Subtle outer drop */
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.1),
+    0 0 0 rgba(255, 255, 255, 0);
+  position: relative;
+  overflow: hidden;
+}
+
+.experience-card:hover {
+  /* Only change the outline color on hover */
+  border-color: var(--border-hover);
+  /* Bolder shadow and subtle lift effect */
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.15),
+    0 0 0 rgba(255, 255, 255, 0);
+  transform: translateY(-2px);
+}
+
+/* Remove glass highlights */
+.experience-card::before,
+.experience-card::after {
+  content: none;
+}
+
+/* Vertical connector dot - only for middle cards */
+.experience-card:not(:first-child):not(:last-child)::before {
+  content: '';
+  position: absolute;
+  left: -26px;
+  top: 35px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-3);
+  border: 3px solid var(--bg-primary);
+  z-index: 10;
+}
+
+/* Experience Header - Two Row Layout */
+.experience-header {
+  margin-bottom: 15px;
+}
+
+.experience-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.experience-row:last-child {
+  margin-bottom: 0;
+}
+
+.experience-title {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  margin: 0;
+}
+
+.experience-date {
+  color: var(--text-project-date);
+  font-size: 1.0rem;
+  font-style: italic;
+  margin: 0;
+}
+
+.experience-company {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  font-weight: 500;
+  margin: 0;
+}
+
+.experience-location {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  font-style: italic;
+  margin: 0;
+}
+
+/* Tech Tags - Same as projects */
+.tech-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 15px 0;
+}
+
+.tech-tag {
+  background: var(--tech-tag-bg, #4A4E69);
+  padding: 4px 10px;
+  border-radius: 5px;
+  font-size: 0.75rem;
+  font-family: Consolas, monospace;
+  font-weight: 500;
+  border: 1px solid var(--tech-tag-bg, #4A4E69);
+  transition: all 0.2s ease;
+}
+
+/* Tech tag text color based on theme */
+html[data-theme="light"] .tech-tag {
+  color: #22223B;  /* Dark text on light F2E9E4 background */
+}
+
+html[data-theme="dark"] .tech-tag {
+  color: #F2E9E4;  /* Light text on dark background */
+}
+
+/* Auto dark mode system preference */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .tech-tag {
+    color: #F2E9E4;  /* Light text on dark background */
+  }
+}
+
+/* Default (light mode unless specified) */
+:root:not([data-theme]) .tech-tag {
+  color: var(--text-primary);
+}
+
+.tech-tag:hover {
+  filter: brightness(1.05);
+}
+
+.experience-description {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin-top: 12px;
+}
+
+.experience-description ul {
+  margin: 15px 0;
+  padding-left: 20px;
+}
+
+.experience-description li {
+  margin: 10px 0;
+  color: var(--text-secondary);
+}
+
+.experience-description li::marker {
+  color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .timeline::before { left: 20px; }
+  .experience-card:not(:first-child):not(:last-child)::before { left: -18px; width: 10px; height: 10px; }
+  .experience-row { 
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 5px;
+  }
+  .experience-date,
+  .experience-location { 
+    text-align: left; 
+  }
+  .experience-card { 
+    padding: 25px 16px 12px 16px; 
+  }
+  .experience-title {
+    font-size: 1.2rem;
+  }
+}
+</style>
+
+{% assign sorted_experience = site.work-experience | sort: 'start_date' | reverse %}
+<div class="timeline">
+{% for job in sorted_experience %}
+<div class="experience-card">
+    <div class="experience-header">
+        <div class="experience-row">
+            <h2 class="experience-title">{{ job.title }}</h2>
+            <div class="experience-date">{{ job.date_range }}</div>
+        </div>
+        <div class="experience-row">
+            <div class="experience-company">{{ job.company }}</div>
+            {% if job.location %}
+            <div class="experience-location">{{ job.location }}</div>
+            {% endif %}
+        </div>
+    </div>
+    
+    {% if job.technologies %}
+    <div class="tech-tags">
+        {% for tech in job.technologies %}
+        <span class="tech-tag">{{ tech }}</span>
+        {% endfor %}
+    </div>
+    {% endif %}
+    
+    <div class="experience-description">
+        {{ job.content }}
+    </div>
+</div>
 {% endfor %}
-
+</div>
